@@ -1,6 +1,7 @@
 package com.api.clinica.controller;
 
 import com.api.clinica.controller.dto.request.PacienteRequestDto;
+import com.api.clinica.controller.dto.request.PacienteRequestEditDto;
 import com.api.clinica.controller.dto.response.PacienteDto;
 import com.api.clinica.model.Paciente;
 import com.api.clinica.service.PacienteService;
@@ -51,9 +52,9 @@ public class PacienteController {
     @Transactional
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PacienteDto atualizar(@PathVariable Long id, @RequestBody PacienteRequestDto pacienteRequestDto){
+    public PacienteDto atualizar(@PathVariable Long id, @RequestBody PacienteRequestEditDto pacienteRequestEditDto){
         Paciente paciente = pacienteService.buscarPorId(id);
-        modelMapper.map(pacienteRequestDto, paciente);
+        modelMapper.map(pacienteRequestEditDto, paciente);
         return PacienteDto.converter(paciente, modelMapper);
     }
 }
