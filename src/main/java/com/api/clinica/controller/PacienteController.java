@@ -36,9 +36,15 @@ public class PacienteController {
         return PacienteDto.converter(pacienteService.buscarTodos(), modelMapper);
     }
 
-    @GetMapping(path = "/{cpf}")
+    @GetMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public PacienteDto buscarPorCpf(@PathVariable String cpf){
+    public PacienteDto buscarPorId(@PathVariable Long id){
+        return PacienteDto.converter(pacienteService.buscarPorId(id), modelMapper);
+    }
+
+    @GetMapping(path = "/filter")
+    @ResponseStatus(HttpStatus.OK)
+    public PacienteDto buscarPorCpf(@RequestParam(name = "cpf") String cpf){
         return PacienteDto.converter(pacienteService.buscarPorCpf(cpf), modelMapper);
     }
 
