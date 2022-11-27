@@ -1,6 +1,7 @@
 package com.api.clinica.service;
 
 import com.api.clinica.model.Agendamento;
+import com.api.clinica.model.enums.StatusAgendamento;
 import com.api.clinica.repository.AgendamentoRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,10 @@ public class AgendamentoService {
 
     public List<Agendamento> buscarTodos(){
         return agendamentoRepository.findAll();
+    }
+
+    public List<Agendamento> buscarPorPacienteCpf(String cpf, StatusAgendamento status){
+        return agendamentoRepository.findByPacienteCpfAndStatus(cpf, status);
     }
 
 }
