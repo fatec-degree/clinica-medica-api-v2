@@ -2,6 +2,7 @@ package com.api.clinica.service;
 
 import com.api.clinica.exceptions.ResourceNotFoundException;
 import com.api.clinica.model.Medico;
+import com.api.clinica.model.enums.Especialidade;
 import com.api.clinica.repository.MedicoRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,10 @@ public class MedicoService {
     public Medico buscarPorId(Long id){
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Médico não encontrado."));
+    }
+
+    public List<Medico> buscarPorEspecialidade(Especialidade especialidade){
+        return repository.findByEspecialidadeAndAtivoTrue(especialidade);
     }
 
 }

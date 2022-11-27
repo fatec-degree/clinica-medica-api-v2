@@ -4,6 +4,7 @@ import com.api.clinica.controller.dto.request.MedicoEditRequestDto;
 import com.api.clinica.controller.dto.request.MedicoRequestDto;
 import com.api.clinica.controller.dto.response.MedicoDto;
 import com.api.clinica.model.Medico;
+import com.api.clinica.model.enums.Especialidade;
 import com.api.clinica.service.MedicoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,6 @@ public class MedicoController {
         this.modelMapper = modelMapper;
     }
 
-
     @Transactional
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -42,6 +42,12 @@ public class MedicoController {
     @ResponseStatus(HttpStatus.OK)
     public MedicoDto buscarPorId(@PathVariable Long id){
         return MedicoDto.converter(medicoService.buscarPorId(id), modelMapper);
+    }
+
+    @GetMapping(path = "/filter")
+    @ResponseStatus(HttpStatus.OK)
+    public List<MedicoDto> buscarPorEspecialidade(@RequestParam(value = "especialidade") Especialidade especialidade){
+        return MedicoDto.converter(medicoService.buscarPorEspecialidade(especialidade), modelMapper);
     }
 
     @Transactional
