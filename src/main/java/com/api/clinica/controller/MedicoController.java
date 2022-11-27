@@ -1,11 +1,13 @@
 package com.api.clinica.controller;
 
+import com.api.clinica.controller.dto.request.MedicoEditRequestDto;
 import com.api.clinica.controller.dto.request.MedicoRequestDto;
 import com.api.clinica.controller.dto.response.MedicoDto;
 import com.api.clinica.model.Medico;
 import com.api.clinica.service.MedicoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +24,8 @@ public class MedicoController {
         this.modelMapper = modelMapper;
     }
 
+
+    @Transactional
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public MedicoDto salvar(@RequestBody MedicoRequestDto medicoRequestDto){
@@ -38,6 +42,15 @@ public class MedicoController {
     @ResponseStatus(HttpStatus.OK)
     public MedicoDto buscarPorId(@PathVariable Long id){
         return MedicoDto.converter(medicoService.buscarPorId(id), modelMapper);
+    }
+
+    @Transactional
+    @PutMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public MedicoDto atualizar(@PathVariable Long id, @RequestBody MedicoEditRequestDto medicoEditRequestDto){
+        Medico medico = medicoService.buscarPorId(id);
+        modelMapper.map(medicoEditRequestDto, medico);
+        return MedicoDto.converter(medico, modelMapper);
     }
 
 }
