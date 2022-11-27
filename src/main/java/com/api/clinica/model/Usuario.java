@@ -20,5 +20,6 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_usuario")
     private TipoUsuario tipoUsuario;
+    private Boolean ativo = true;
 
 }

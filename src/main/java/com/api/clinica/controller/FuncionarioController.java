@@ -1,8 +1,8 @@
 package com.api.clinica.controller;
 
 import com.api.clinica.controller.dto.request.FuncionarioEditRequestDto;
-import com.api.clinica.controller.dto.response.FuncionarioDto;
 import com.api.clinica.controller.dto.request.FuncionarioRequestDto;
+import com.api.clinica.controller.dto.response.FuncionarioDto;
 import com.api.clinica.model.Funcionario;
 import com.api.clinica.service.FuncionarioService;
 import org.modelmapper.ModelMapper;
@@ -50,14 +50,6 @@ public class FuncionarioController {
         Funcionario funcionario = funcionarioService.buscarPorId(id);
         modelMapper.map(funcionarioEditRequestDto, funcionario);
         return FuncionarioDto.converter(funcionario, modelMapper);
-    }
-
-    @Transactional
-    @DeleteMapping(path = "/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable Long id){
-        Funcionario funcionario = funcionarioService.buscarPorId(id);
-        funcionario.setAtivo(false);
     }
 
 }

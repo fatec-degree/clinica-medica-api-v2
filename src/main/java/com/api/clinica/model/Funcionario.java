@@ -12,6 +12,5 @@ import javax.persistence.Table;
 public class Funcionario extends Usuario{
 
     private String setor;
-    private Boolean ativo = true;
 
 }

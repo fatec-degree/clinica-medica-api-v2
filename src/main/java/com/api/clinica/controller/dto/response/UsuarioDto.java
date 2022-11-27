@@ -15,6 +15,7 @@ public class UsuarioDto {
     private String nome;
     private String email;
     private TipoUsuario tipoUsuario;
+    private Boolean ativo;
 
     public static UsuarioDto converter(Usuario usuario, ModelMapper modelMapper){
         return modelMapper.map(usuario, UsuarioDto.class);

@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    List<Usuario> findByTipoUsuario(TipoUsuario tipo);
+    List<Usuario> findByTipoUsuarioAndAtivoTrue(TipoUsuario tipo);
 
 }
