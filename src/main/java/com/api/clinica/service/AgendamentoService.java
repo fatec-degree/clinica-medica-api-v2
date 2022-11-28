@@ -3,6 +3,7 @@ package com.api.clinica.service;
 import com.api.clinica.exceptions.ResourceNotFoundException;
 import com.api.clinica.model.Agendamento;
 import com.api.clinica.model.enums.StatusAgendamento;
+import com.api.clinica.repository.AgendamentoCustomRepository;
 import com.api.clinica.repository.AgendamentoRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,13 @@ import java.util.List;
 public class AgendamentoService {
 
     private AgendamentoRepository agendamentoRepository;
+    private AgendamentoCustomRepository agendamentoCustomRepository;
     private MedicoService medicoService;
     private PacienteService pacienteService;
 
-    public AgendamentoService(AgendamentoRepository agendamentoRepository, MedicoService medicoService, PacienteService pacienteService) {
+    public AgendamentoService(AgendamentoRepository agendamentoRepository, AgendamentoCustomRepository agendamentoCustomRepository, MedicoService medicoService, PacienteService pacienteService) {
         this.agendamentoRepository = agendamentoRepository;
+        this.agendamentoCustomRepository = agendamentoCustomRepository;
         this.medicoService = medicoService;
         this.pacienteService = pacienteService;
     }
@@ -27,12 +30,8 @@ public class AgendamentoService {
         return agendamentoRepository.save(agendamento);
     }
 
-    public List<Agendamento> buscarTodos(){
-        return agendamentoRepository.findAll();
-    }
-
-    public List<Agendamento> buscarPorPacienteCpf(String cpf, StatusAgendamento status){
-        return agendamentoRepository.findByPacienteCpfAndStatus(cpf, status);
+    public List<Agendamento> buscarTodos(String cpf, StatusAgendamento status){
+        return agendamentoCustomRepository.findAll(cpf, status);
     }
 
     public Agendamento buscarPorId(Long id) {

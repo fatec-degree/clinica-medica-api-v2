@@ -36,15 +36,9 @@ public class AgendamentoController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<AgendamentoDto> buscarTodos(){
-        return AgendamentoDto.converter(agendamentoService.buscarTodos(), modelMapper);
-    }
-
-    @GetMapping(path = "/filter")
-    @ResponseStatus(HttpStatus.OK)
-    public List<AgendamentoDto> buscarTodosComFiltro(@RequestParam(value = "cpf") String cpf,
-                                                  @RequestParam(value = "status") StatusAgendamento status){
-        return AgendamentoDto.converter(agendamentoService.buscarPorPacienteCpf(cpf, status), modelMapper);
+    public List<AgendamentoDto> buscarTodos(@RequestParam(value = "cpf", required = false) String cpf,
+                                            @RequestParam(value = "status", required = false) StatusAgendamento status){
+        return AgendamentoDto.converter(agendamentoService.buscarTodos(cpf, status), modelMapper);
     }
 
     @Transactional
