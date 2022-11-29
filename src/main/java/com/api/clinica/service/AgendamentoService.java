@@ -2,6 +2,7 @@ package com.api.clinica.service;
 
 import com.api.clinica.exceptions.ResourceNotFoundException;
 import com.api.clinica.model.Agendamento;
+import com.api.clinica.model.enums.Especialidade;
 import com.api.clinica.model.enums.StatusAgendamento;
 import com.api.clinica.repository.AgendamentoCustomRepository;
 import com.api.clinica.repository.AgendamentoRepository;
@@ -41,6 +42,10 @@ public class AgendamentoService {
 
     public List<Agendamento> buscarPorIdMedicoEPeriodoOuStatus(Long idMedico, Integer dias, StatusAgendamento status){
         return agendamentoCustomRepository.findMedicoAndPeriodOrStatus(idMedico, dias, status);
+    }
+
+    public List<Agendamento> buscarPorEspecialidade(Especialidade especialidade){
+        return agendamentoRepository.findByEspecialidade(especialidade);
     }
 
 }
