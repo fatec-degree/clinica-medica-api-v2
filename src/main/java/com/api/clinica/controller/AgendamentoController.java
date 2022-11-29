@@ -41,6 +41,15 @@ public class AgendamentoController {
         return AgendamentoDto.converter(agendamentoService.buscarTodos(cpf, status), modelMapper);
     }
 
+    @GetMapping("/filter")
+    @ResponseStatus(HttpStatus.OK)
+    public List<AgendamentoDto> buscarPorIdMedicoPeriodoOuStatus(
+            @RequestParam(value = "idMedico") Long id,
+            @RequestParam(value = "dias", required = false) Integer dias,
+            @RequestParam(value = "status", required = false) StatusAgendamento status){
+        return AgendamentoDto.converter(agendamentoService.buscarPorIdMedicoEPeriodoOuStatus(id, dias, status), modelMapper);
+    }
+
     @Transactional
     @PatchMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
