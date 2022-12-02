@@ -16,6 +16,7 @@ public class PacienteDto {
     private Long id;
     private String nome;
     private String email;
+    private String senha;
     private TipoUsuario tipoUsuario;
     private String cpf;
     private LocalDate dataNascimento;

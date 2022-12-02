@@ -17,6 +17,7 @@ public class MedicoDto {
     private String nome;
     private Especialidade especialidade;
     private String email;
+    private String senha;
     private TipoUsuario tipoUsuario;
     private String setor;
     private Boolean ativo;
