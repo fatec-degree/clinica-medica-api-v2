@@ -1,7 +1,6 @@
 package com.api.clinica.service;
 
 import com.api.clinica.exceptions.ResourceNotFoundException;
-import com.api.clinica.model.Funcionario;
 import com.api.clinica.model.Usuario;
 import com.api.clinica.model.enums.TipoUsuario;
 import com.api.clinica.repository.UsuarioRepository;
@@ -26,4 +25,10 @@ public class UsuarioService {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
     }
+
+    public Usuario buscarPorEmail(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
+    }
+
 }

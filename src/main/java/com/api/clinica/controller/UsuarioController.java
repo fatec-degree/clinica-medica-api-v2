@@ -24,6 +24,12 @@ public class UsuarioController {
         this.modelMapper = modelMapper;
     }
 
+    @GetMapping(path = "/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public UsuarioDto buscarPorId(@PathVariable String email){
+        return UsuarioDto.converter(usuarioService.buscarPorEmail(email), modelMapper);
+    }
+
     @GetMapping(path = "/filter")
     @ResponseStatus(HttpStatus.OK)
     public List<UsuarioDto> buscarPorTipo(@RequestParam(value = "tipo") TipoUsuario tipo){
