@@ -47,8 +47,9 @@ public class AgendamentoController {
     public List<AgendamentoDto> buscarPorIdMedicoPeriodoOuStatus(
             @RequestParam(value = "idMedico") Long id,
             @RequestParam(value = "dias", required = false) Integer dias,
-            @RequestParam(value = "status", required = false) StatusAgendamento status){
-        return AgendamentoDto.converter(agendamentoService.buscarPorIdMedicoEPeriodoOuStatus(id, dias, status), modelMapper);
+            @RequestParam(value = "status", required = false) StatusAgendamento status,
+            @RequestParam(value = "especialidade", required = false) Especialidade especialidade){
+        return AgendamentoDto.converter(agendamentoService.buscarPorIdMedicoEPeriodoOuStatus(id, dias, status, especialidade), modelMapper);
     }
 
     @GetMapping(path = "/filter/{especialidade}")

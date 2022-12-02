@@ -40,8 +40,8 @@ public class AgendamentoService {
                 .orElseThrow(() -> new ResourceNotFoundException("Agendamento não encontrado."));
     }
 
-    public List<Agendamento> buscarPorIdMedicoEPeriodoOuStatus(Long idMedico, Integer dias, StatusAgendamento status){
-        return agendamentoCustomRepository.findMedicoAndPeriodOrStatus(idMedico, dias, status);
+    public List<Agendamento> buscarPorIdMedicoEPeriodoOuStatus(Long idMedico, Integer dias, StatusAgendamento status, Especialidade especialidade){
+        return agendamentoCustomRepository.findMedicoAndPeriodOrStatus(idMedico, dias, status, especialidade);
     }
 
     public List<Agendamento> buscarPorEspecialidade(Especialidade especialidade){

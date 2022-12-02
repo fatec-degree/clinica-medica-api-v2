@@ -2,6 +2,7 @@ package com.api.clinica.repository;
 
 
 import com.api.clinica.model.Agendamento;
+import com.api.clinica.model.enums.Especialidade;
 import com.api.clinica.model.enums.StatusAgendamento;
 import org.springframework.stereotype.Repository;
 
@@ -39,7 +40,7 @@ public class AgendamentoCustomRepository {
         return query.getResultList();
     }
 
-    public List<Agendamento> findMedicoAndPeriodOrStatus(Long idMedico, Integer dias, StatusAgendamento status){
+    public List<Agendamento> findMedicoAndPeriodOrStatus(Long idMedico, Integer dias, StatusAgendamento status, Especialidade especialidade){
         String jpql = "SELECT a FROM Agendamento a WHERE a.medico.id = :id";
         if(dias != null){
             if(dias < 0){
@@ -50,6 +51,9 @@ public class AgendamentoCustomRepository {
         }
         if(status != null){
             jpql += " AND a.status = :status";
+        }
+        if(especialidade != null){
+            jpql += " AND a.especialidade = :especialidade";
         }
 
         TypedQuery<Agendamento> query = entityManager.createQuery(jpql, Agendamento.class);
@@ -65,6 +69,9 @@ public class AgendamentoCustomRepository {
         }
         if(status != null){
             query.setParameter("status", status);
+        }
+        if(especialidade != null){
+            query.setParameter("especialidade", especialidade);
         }
 
         return query.getResultList();
