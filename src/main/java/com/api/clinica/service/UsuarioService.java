@@ -1,5 +1,6 @@
 package com.api.clinica.service;
 
+import com.api.clinica.exceptions.InvalidCredentialsException;
 import com.api.clinica.exceptions.ResourceNotFoundException;
 import com.api.clinica.model.Usuario;
 import com.api.clinica.model.enums.TipoUsuario;
@@ -31,4 +32,16 @@ public class UsuarioService {
                 .orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado."));
     }
 
+    public Usuario login(String email, String senha) {
+        try {
+            Usuario usuario = this.buscarPorEmail(email);
+            if(usuario.getSenha().equals(senha)){
+                return usuario;
+            } else {
+                throw new InvalidCredentialsException("Email ou senha inválidos.");
+            }
+        } catch (ResourceNotFoundException | InvalidCredentialsException ex){
+            throw new InvalidCredentialsException("Email ou senha inválidos.");
+        }
+    }
 }

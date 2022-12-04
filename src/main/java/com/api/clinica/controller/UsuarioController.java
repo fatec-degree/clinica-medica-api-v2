@@ -1,5 +1,6 @@
 package com.api.clinica.controller;
 
+import com.api.clinica.controller.dto.request.LoginDto;
 import com.api.clinica.controller.dto.response.UsuarioDto;
 import com.api.clinica.model.Funcionario;
 import com.api.clinica.model.Usuario;
@@ -23,6 +24,18 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
         this.modelMapper = modelMapper;
     }
+
+    @PostMapping(path = "/login")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public UsuarioDto login(@RequestBody LoginDto loginDto){
+        return UsuarioDto.converter(usuarioService.login(loginDto.getEmail(), loginDto.getSenha()), modelMapper);
+    }
+
+//    @GetMapping(path = "/{id}")
+//    @ResponseStatus(HttpStatus.OK)
+//    public UsuarioDto buscarPorId(@PathVariable Long id){
+//        return UsuarioDto.converter(usuarioService.buscarPorId(id), modelMapper);
+//    }
 
     @GetMapping(path = "/{email}")
     @ResponseStatus(HttpStatus.OK)
