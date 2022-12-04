@@ -2,7 +2,7 @@ package com.api.clinica.controller;
 
 import com.api.clinica.controller.dto.request.LoginDto;
 import com.api.clinica.controller.dto.response.UsuarioDto;
-import com.api.clinica.model.Funcionario;
+import com.api.clinica.controller.dto.response.UsuarioLoggedDto;
 import com.api.clinica.model.Usuario;
 import com.api.clinica.model.enums.TipoUsuario;
 import com.api.clinica.service.UsuarioService;
@@ -31,11 +31,11 @@ public class UsuarioController {
         return UsuarioDto.converter(usuarioService.login(loginDto.getEmail(), loginDto.getSenha()), modelMapper);
     }
 
-//    @GetMapping(path = "/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public UsuarioDto buscarPorId(@PathVariable Long id){
-//        return UsuarioDto.converter(usuarioService.buscarPorId(id), modelMapper);
-//    }
+    @GetMapping(path = "/loggedUser/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UsuarioLoggedDto buscarPorId(@PathVariable Long id){
+        return UsuarioLoggedDto.converter(usuarioService.buscarPorId(id), modelMapper);
+    }
 
     @GetMapping(path = "/{email}")
     @ResponseStatus(HttpStatus.OK)
